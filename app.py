@@ -272,6 +272,9 @@ if st.session_state.current_page != "home":
 import streamlit as st
 import os
 import pandas as pd
+import spacy
+import subprocess
+import sys
 from utils.ats_checker import analyze_resume
 from utils.resume_generator import generate_resume
 import base64
@@ -279,6 +282,12 @@ from datetime import datetime
 from PIL import Image
 import io
 import sys
+
+# Ensure en_core_web_sm is installed
+try:
+    spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 
 # ====== MUST BE FIRST STREAMLIT COMMAND ======
 st.set_page_config(
